@@ -5,6 +5,7 @@
  */
 package br.senac.sp.petfeliz.pi3.dao;
 
+import br.senac.petfeliz.pi3.Conexao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,20 +26,6 @@ public class ProdutoDAO {
         this.conexao = conexao;
     }
 
-    public static Connection obterConexao() throws ClassNotFoundException, SQLException {
-        //
-        Connection conn = null;
-        // Passo 1: Registar Driver JBDC
-        Class.forName("com.mysql.jdbc.Driver");
-        // Passo 2: Obter a conexão
-        conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3307/tabacaria",
-                "root",
-                "");
-
-        return conn;
-    }
-
     public List<Produto> listarProdutos() {
         List<Produto> produtos = new ArrayList<Produto>();
 
@@ -48,7 +35,7 @@ public class ProdutoDAO {
         //comandos SQL e fechamentos
         PreparedStatement preparedStatement = null;
         try {
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             String sql = "SELECT * FROM PRODUTO";
             java.sql.Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -100,7 +87,7 @@ public class ProdutoDAO {
         PreparedStatement preparedStatement = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
@@ -130,7 +117,7 @@ public class ProdutoDAO {
         try {
             String sqlid = "select max(id) as id from PRODUTO";
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sqlid);
 
@@ -167,7 +154,7 @@ public class ProdutoDAO {
         for (String numero : categorias) {
             try {
                 //Abre uma conexão com o banco de dados
-                connection = obterConexao();
+                connection = Conexao.getConexao();
                 //Cria um statement para execução de instruções SQL
                 preparedStatement = connection.prepareStatement(sql);
                 //Configura os parâmetros do "PreparedStatement"
@@ -207,7 +194,7 @@ public class ProdutoDAO {
         ResultSet result = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
@@ -270,7 +257,7 @@ public class ProdutoDAO {
         ResultSet result = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
 
@@ -318,7 +305,7 @@ public class ProdutoDAO {
         PreparedStatement preparedStatement = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             String sql = "UPDATE produto "
                 + " SET nome = ?, marca = ?, descricao = ?, preco_compra = ?, preco_venda = ?,"
                 + " quantidade = ?"
@@ -357,7 +344,7 @@ public class ProdutoDAO {
         try {
             String sqlid = "select max(id) as id from PRODUTO";
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sqlid);
 
@@ -393,7 +380,7 @@ public class ProdutoDAO {
         for (String numero : categorias) {
             try {
                 //Abre uma conexão com o banco de dados
-                connection = obterConexao();
+                connection = Conexao.getConexao();
                 //Cria um statement para execução de instruções SQL
                 preparedStatement = connection.prepareStatement(sql);
                 //Configura os parâmetros do "PreparedStatement"
@@ -424,7 +411,7 @@ public class ProdutoDAO {
         try 
         {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, codigo);
@@ -458,7 +445,7 @@ public class ProdutoDAO {
         try 
         {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, codigo);

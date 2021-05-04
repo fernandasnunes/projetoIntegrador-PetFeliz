@@ -48,7 +48,7 @@ public class IncluirUsuario extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        String nome = request.getParameter("func");
+        String nome = request.getParameter("nome");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         String ativo = "S";

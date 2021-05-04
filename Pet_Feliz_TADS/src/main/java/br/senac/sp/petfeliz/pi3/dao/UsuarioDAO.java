@@ -1,5 +1,6 @@
 package br.senac.sp.petfeliz.pi3.dao;
 
+import br.senac.petfeliz.pi3.Conexao;
 import br.senac.sp.petfeliz.pi3.model.Funcionario;
 import br.senac.sp.petfeliz.pi3.model.Usuario;
 import java.sql.Connection;
@@ -22,20 +23,6 @@ public class UsuarioDAO {
         this.conexao = conexao;
     }
 
-    public static Connection obterConexao() throws ClassNotFoundException, SQLException {
-        //
-        Connection conn = null;
-        // Passo 1: Registar Driver JBDC
-        Class.forName("com.mysql.jdbc.Driver");
-        // Passo 2: Obter a conexão
-        conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3307/tabacaria",
-                "root",
-                "");
-
-        return conn;
-    }
-
     //Inserir
     public static void inserir(Usuario usuario) throws SQLException, Exception {
         //Comando do banco
@@ -49,7 +36,7 @@ public class UsuarioDAO {
 
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
@@ -144,7 +131,7 @@ public class UsuarioDAO {
         PreparedStatement p = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             String sql = "UPDATE usuarios "
                     + " SET nome = ?, login = ?, senha = ?, ativo = ? "
                     + " WHERE id = ?";
@@ -234,7 +221,7 @@ public class UsuarioDAO {
         ResultSet result = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
@@ -287,7 +274,7 @@ public class UsuarioDAO {
         try {
             //Abre uma conexão com o banco de dados
 
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             String sql = "UPDATE usuarios SET ativo = ? WHERE id=?";
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
@@ -318,7 +305,7 @@ public class UsuarioDAO {
 
         PreparedStatement preparedStatement = null;
         try {
-            conn = obterConexao();
+            conn = Conexao.getConexao();
             String sql = "SELECT * FROM usuarios WHERE ativo='" + "S" + " "
                     + "AND login= '" + login + "'";
             java.sql.Statement stmt = conn.createStatement();
@@ -352,7 +339,7 @@ public class UsuarioDAO {
         ResultSet result = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
 

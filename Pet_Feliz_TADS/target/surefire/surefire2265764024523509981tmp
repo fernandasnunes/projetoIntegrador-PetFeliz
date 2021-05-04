@@ -1,9 +1,9 @@
 #surefire
-#Sun May 02 19:01:24 BRT 2021
+#Mon May 03 21:43:41 BRT 2021
 testClassesDirectory=C\:\\Projects\\Faculdade\\Pet_Feliz_TADS\\Pet_Feliz_TADS\\target\\test-classes
-classPathUrl.4=C\:\\Users\\fernanda.nunes\\.m2\\repository\\javax\\servlet\\jstl\\1.2\\jstl-1.2.jar
+classPathUrl.4=C\:\\Users\\fernanda.nunes\\.m2\\repository\\mysql\\mysql-connector-java\\8.0.24\\mysql-connector-java-8.0.24.jar
 forkMode=once
-classPathUrl.3=C\:\\Users\\fernanda.nunes\\.m2\\repository\\mysql\\mysql-connector-java\\5.1.46\\mysql-connector-java-5.1.46.jar
+classPathUrl.3=C\:\\Users\\fernanda.nunes\\.m2\\repository\\javax\\servlet\\jstl\\1.2\\jstl-1.2.jar
 classPathUrl.2=C\:\\Users\\fernanda.nunes\\.m2\\repository\\javax\\javaee-web-api\\7.0\\javaee-web-api-7.0.jar
 useManifestOnlyJar=true
 classPathUrl.1=C\:\\Projects\\Faculdade\\Pet_Feliz_TADS\\Pet_Feliz_TADS\\target\\classes
@@ -23,3 +23,4 @@ failIfNoTests=false
 includes1=**/*Test.java
 includes0=**/Test*.java
 childDelegation=false
+classPathUrl.5=C\:\\Users\\fernanda.nunes\\.m2\\repository\\com\\google\\protobuf\\protobuf-java\\3.11.4\\protobuf-java-3.11.4.jar

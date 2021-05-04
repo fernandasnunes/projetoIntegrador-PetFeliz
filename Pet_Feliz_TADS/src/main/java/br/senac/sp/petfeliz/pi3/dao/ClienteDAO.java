@@ -5,6 +5,7 @@
  */
 package br.senac.sp.petfeliz.pi3.dao;
 
+import br.senac.petfeliz.pi3.Conexao;
 import br.senac.sp.petfeliz.pi3.model.Cliente;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,20 +24,6 @@ public class ClienteDAO {
         
             this.conexao = conexao;
     }
-      
-    public static Connection obterConexao() throws SQLException, ClassNotFoundException {
-        
-        Connection conn = null;
-           
-        Class.forName("com.mysql.jdbc.Driver");
-        
-        conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3307/tabacaria",
-                "root",
-                "");
-        
-        return  conn;
-    }
     
     public List<Cliente> listarClientes() {
         
@@ -47,7 +34,7 @@ public class ClienteDAO {
         PreparedStatement preparedStatemnet = null;
         
         try{    
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             String sql = "SELECT * FROM CLIENTE";
             java.sql.Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -102,7 +89,7 @@ public class ClienteDAO {
     
                 try {
                 //Abre uma conexão com o banco de dados
-                connection = obterConexao();
+                connection = Conexao.getConexao();
                 //Cria um statement para execução de instruções SQL
                 preparedStatement = connection.prepareStatement(sqlInserir);
                 
@@ -143,7 +130,7 @@ public class ClienteDAO {
          
             try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sqlPesquisa);
             //Configura os parâmetros do "PreparedStatement"
@@ -194,7 +181,7 @@ public class ClienteDAO {
          PreparedStatement preparedStatement = null;
          
          try{
-         connection = obterConexao();
+         connection = Conexao.getConexao();
          
          String sqlUpdate = "UPDATE cliente "
                  +" SET NOME = ?, ENDERECO = ?,BAIRRO = ?,CIDADE = ?, ESTADO = ?, CEP = ?,SEXO = ? ,TELEFONE = ?, CELULAR = ?"
@@ -236,7 +223,7 @@ public class ClienteDAO {
              
         try {
             
-            connection = obterConexao();  
+            connection = Conexao.getConexao();
             
             String sqlExcluir = "UPDATE cliente SET ativo = ? WHERE ID = ?";
             

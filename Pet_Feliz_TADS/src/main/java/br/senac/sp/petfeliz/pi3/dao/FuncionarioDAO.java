@@ -5,6 +5,7 @@
  */
 package br.senac.sp.petfeliz.pi3.dao;
 
+import br.senac.petfeliz.pi3.Conexao;
 import br.senac.sp.petfeliz.pi3.model.Funcionario;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,19 +24,6 @@ public class FuncionarioDAO {
         this.conexao = conexao;
     }
     
-    public static Connection obterConexao() throws ClassNotFoundException, SQLException {
-        //
-        Connection conn = null;
-        // Passo 1: Registar Driver JBDC
-        Class.forName("com.mysql.jdbc.Driver");
-        // Passo 2: Obter a conexão
-        conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3307/tabacaria",
-                "root",
-                "");
-
-        return conn;
-    }
     public static void inserir(Funcionario funcionario)
             throws SQLException, Exception {
         //Monta a string de inserção de um funcionario no BD,
@@ -50,7 +38,7 @@ public class FuncionarioDAO {
         PreparedStatement preparedStatement = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
@@ -96,7 +84,7 @@ public class FuncionarioDAO {
         ResultSet result = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
@@ -156,7 +144,7 @@ public class FuncionarioDAO {
         try {
             //Abre uma conexão com o banco de dados
         
-           connection = obterConexao();
+           connection = Conexao.getConexao();
             String sql = "UPDATE funcionario SET ativo = ? WHERE id=?";
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
@@ -186,7 +174,7 @@ public class FuncionarioDAO {
         PreparedStatement preparedStatement = null;
         try {
             //Abre uma conexão com o banco de dados
-            connection = obterConexao();
+            connection = Conexao.getConexao();
             String sql = "UPDATE funcionario "
                 + " SET nome = ?, cargo = ?, endereco = ?, bairro = ?, cidade = ?,"
                 + " estado = ?, cep = ?, sexo = ?, telefone = ?, celular = ?"
